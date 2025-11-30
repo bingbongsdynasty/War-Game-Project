@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run War Game",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}\\war_game.exe",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "preLaunchTask": "Build War Game",
+      "stopAtEntry": false
+    }
+  ]
+}

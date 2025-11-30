@@ -1,0 +1,22 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build War Game",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "call \"C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\Common7\\Tools\\VsDevCmd.bat\" -arch=x64 -host_arch=x64 && cl /nologo /EHsc /std:c++17 \"${workspaceFolder}\\main.cpp\" \"${workspaceFolder}\\war.cpp\" \"${workspaceFolder}\\Deck.cpp\" \"${workspaceFolder}\\Card.cpp\" /Fe:\"${workspaceFolder}\\war_game.exe\""
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$msCompile"]
+    }
+  ]
+}
