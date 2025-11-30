@@ -1,9 +1,9 @@
 #include "Card.h" //include the header file so this file knows about the Card class and enums
 
 //constructor definition
-//initializes both the value and suit of a card when it is created
+//initializes both the suit and value of a card when it is created
 //uses an initialization list (the colon) to assign values directly instead of later in the body
-Card::Card(Value v, Suit s) : value(v), suit(s) {
+Card::Card(Value v, Suit s) : suit(s), value(v) {
     //no code needed inside since both members are set above
 }
 
