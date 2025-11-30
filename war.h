@@ -10,7 +10,7 @@
 #include <algorithm>  //for std::shuffle
 #include <iostream>   //for printing messages
 #include "Card.h"     //for Card, Suit, Value, and printing
-#include "deck.h"     //for Deck
+#include "Deck.h"     //for Deck
 
 //game outcome for a round or final state
 enum class WinState { winA, winB, tie, ongoing };

@@ -15,25 +15,13 @@ private:
 
 public:
     //builds a full deck and shuffles it using the provided generator
-    explicit Deck(std::default_random_engine& gen) : nextIndex(0) {
-        //create every suit/value pair
-        for (int s = 0; s < 4; ++s) {
-            for (int v = 0; v < 13; ++v) {
-                cards.emplace_back(static_cast<Value>(v), static_cast<Suit>(s));
-            }
-        }
-        //shuffle the deck so draws are random
-        std::shuffle(cards.begin(), cards.end(), gen);
-    }
+    explicit Deck(std::default_random_engine& gen);
 
     //draws the next card; returns nullptr when empty
-    Card* draw() {
-        if (nextIndex >= cards.size()) return nullptr;
-        return &cards[nextIndex++];
-    }
+    Card* draw();
 
     //true when no more cards remain to draw
-    bool empty() const { return nextIndex >= cards.size(); }
+    bool empty() const;
 };
 
 #endif
