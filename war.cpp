@@ -126,6 +126,19 @@ WinState War::subRound() {
             return WinState::winA;
         }
     } else {
+        if (!cardA && !cardB) {
+            std::cout << "Both players are out of cards at the same time. It is a tie." << std::endl;
+            return WinState::tie;
+        }
+        if (!cardA) {
+            std::cout << "Player A is out of cards; player B wins." << std::endl;
+            return WinState::winB;
+        }
+        if (!cardB) {
+            std::cout << "Player B is out of cards; player A wins." << std::endl;
+            return WinState::winA;
+        }
+
         //face-down step; advance the state machine and continue
         updateState(false);
         return WinState::ongoing;
@@ -146,8 +159,10 @@ WinState War::subRound() {
     }
 
     //show hand sizes after any collection
-    std::cout << "(Player A has " << handA.size()
-              << " cards; player B has " << handB.size() << " cards.)" << std::endl;
+    auto pluralize = [](size_t n) { return n == 1 ? " card" : " cards"; };
+    std::cout << "(Player A has " << handA.size() << pluralize(handA.size())
+              << "; player B has " << handB.size() << pluralize(handB.size())
+              << ".)" << std::endl;
 
     //check for an ending
     auto ws = checkForWin();
