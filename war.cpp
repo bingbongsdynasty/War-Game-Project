@@ -126,7 +126,8 @@ WinState War::subRound() {
             return WinState::winA;
         }
     } else {
-        //face-down step; just move cards and continue
+        //face-down step; advance the state machine and continue
+        updateState(false);
         return WinState::ongoing;
     }
 
