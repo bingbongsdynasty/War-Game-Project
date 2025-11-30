@@ -1,0 +1,9 @@
+# Build artifacts
+war
+*.o
+*.obj
+*.exe
+*.out
+
+# Editor settings
+.DS_Store
