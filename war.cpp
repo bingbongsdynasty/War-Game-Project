@@ -25,9 +25,22 @@ std::pair<Card*, Card*> War::placeCards(bool faceUp) {
     if (!handB.empty()) { cardB = handB.front(); handB.pop(); middle.push_back(cardB); }
 
     if (faceUp) {
-        std::cout << "Player A plays " << (cardA ? *cardA : Card(Value::Two, Suit::Clubs))
-                  << " | Player B plays " << (cardB ? *cardB : Card(Value::Two, Suit::Clubs))
-                  << std::endl;
+        if (cardA && cardB) {
+            std::cout << "Player A plays " << *cardA
+                      << " | Player B plays " << *cardB << std::endl;
+        } else {
+            if (cardA) {
+                std::cout << "Player A plays " << *cardA << std::endl;
+            } else {
+                std::cout << "Player A cannot play a card." << std::endl;
+            }
+
+            if (cardB) {
+                std::cout << "Player B plays " << *cardB << std::endl;
+            } else {
+                std::cout << "Player B cannot play a card." << std::endl;
+            }
+        }
     } else {
         std::cout << "Players playing one card each, face down..." << std::endl;
     }
@@ -100,11 +113,34 @@ WinState War::subRound() {
 
     //if either player could not place a card when required, end the game
     if (needFaceUp) {
-        if (!cardA && !cardB) return WinState::tie;
-        if (!cardA) return WinState::winB;
-        if (!cardB) return WinState::winA;
+        if (!cardA && !cardB) {
+            std::cout << "Both players are out of cards at the same time. It is a tie." << std::endl;
+            return WinState::tie;
+        }
+        if (!cardA) {
+            std::cout << "Player A is out of cards; player B wins." << std::endl;
+            return WinState::winB;
+        }
+        if (!cardB) {
+            std::cout << "Player B is out of cards; player A wins." << std::endl;
+            return WinState::winA;
+        }
     } else {
-        //face-down step; just move cards and continue
+        if (!cardA && !cardB) {
+            std::cout << "Both players are out of cards at the same time. It is a tie." << std::endl;
+            return WinState::tie;
+        }
+        if (!cardA) {
+            std::cout << "Player A is out of cards; player B wins." << std::endl;
+            return WinState::winB;
+        }
+        if (!cardB) {
+            std::cout << "Player B is out of cards; player A wins." << std::endl;
+            return WinState::winA;
+        }
+
+        //face-down step; advance the state machine and continue
+        updateState(false);
         return WinState::ongoing;
     }
 
@@ -123,8 +159,10 @@ WinState War::subRound() {
     }
 
     //show hand sizes after any collection
-    std::cout << "(Player A has " << handA.size()
-              << " cards; player B has " << handB.size() << " cards.)" << std::endl;
+    auto pluralize = [](size_t n) { return n == 1 ? " card" : " cards"; };
+    std::cout << "(Player A has " << handA.size() << pluralize(handA.size())
+              << "; player B has " << handB.size() << pluralize(handB.size())
+              << ".)" << std::endl;
 
     //check for an ending
     auto ws = checkForWin();

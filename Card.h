@@ -13,8 +13,8 @@ enum class Value { Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Q
 //defines the Card class that stores a suit and value for each card
 class Card {
 private:
-    const Suit suit;   //the suit of the card (Clubs, Diamonds, Hearts, Spades)
-    const Value value; //the value of the card (Two through Ace)
+    Suit suit;   //the suit of the card (Clubs, Diamonds, Hearts, Spades)
+    Value value; //the value of the card (Two through Ace)
 
 public:
     //constructor assigns both the value and suit when the card is created
